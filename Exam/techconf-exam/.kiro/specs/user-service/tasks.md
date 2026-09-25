@@ -2,7 +2,7 @@
 
 Piano di sviluppo incrementale per lo `user-service`. I task sono atomici, sequenziali e ciascuno indica i requisiti coperti (vedi `requirements.md`) e si basa sul `design.md`. Ogni task lascia il codice in uno stato compilabile e testabile.
 
-- [ ] 1. Setup del servizio e configurazione
+- [x] 1. Setup del servizio e configurazione
   - Creare lo scheletro `services/user/` secondo la struttura Clean Architecture: cartelle `domain/`, `infrastructure/persistence/`, `entrypoints/http/`, `tests/` con i relativi `__init__.py`.
   - Implementare `config.py` che legge `PORT` (default `5001`), `STORAGE_BACKEND` (`memory`|`json`|`sqlite`, default `memory`) e `DATA_DIR` (default `./data`) dall'ambiente.
   - Creare `app.py` come composition root minimale (Flask app factory) che verrà completato al task 8.
