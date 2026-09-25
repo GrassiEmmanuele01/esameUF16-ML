@@ -6,6 +6,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442226
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341450508
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341509369
       }
     ],
     "2. Entità di dominio, stati ed eccezioni": [
@@ -13,6 +23,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442305
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341513389
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341575859
       }
     ],
     "3. Porte di dominio (interfacce)": [
@@ -20,6 +40,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442355
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341579610
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341632584
       }
     ],
     "4. Validazione dei payload (regole di schema e date)": [
@@ -27,6 +57,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442402
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341635848
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341713447
       }
     ],
     "5. Casi d'uso EventService (logica di dominio)": [
@@ -34,6 +74,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442461
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341716633
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341763277
       }
     ],
     "6. Backend di persistenza": [
@@ -41,6 +91,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442543
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341766842
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341818595
       }
     ],
     "7. Client HTTP verso user-service": [
@@ -48,6 +108,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442593
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341821782
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341867725
       }
     ],
     "8. HTTP: serializzazione, mapping errori e rotte": [
@@ -55,6 +125,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442636
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341871091
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341946364
       }
     ],
     "9. Wiring finale (composition root)": [
@@ -62,6 +142,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442687
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341949879
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341999475
       }
     ],
     "10. Unit test del dominio (EventService)": [
@@ -69,6 +159,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442769
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790342003205
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790342090101
       }
     ],
     "11. Unit test dei backend di persistenza (parametrizzati)": [
@@ -76,6 +176,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442822
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790342093651
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790342155612
       }
     ],
     "12. Unit test del client user-service (responses)": [
@@ -83,6 +193,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442863
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790342158941
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790342239945
       }
     ],
     "13. Unit test HTTP + validazione contratto": [
@@ -90,6 +210,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442909
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790342243484
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790342293038
       }
     ],
     "14. Accettazione (opzionale, richiede services.yaml)": [
@@ -97,6 +227,16 @@
         "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
         "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
         "timestamp": 1790341442964
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790342300736
+      },
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790342369191
       }
     ]
   }

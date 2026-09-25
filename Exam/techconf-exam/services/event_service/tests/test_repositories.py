@@ -115,3 +115,54 @@ def test_sqlite_persistence_across_instances(tmp_path):
     path = tmp_path / "events.db"
     SqliteEventRepository(path).add(_make_event(i=6))
     assert SqliteEventRepository(path).get("id-6") is not None
+
+
+def test_list_second_page_offset(repo):
+    # created_at crescente -> ordinamento deterministico id-1..id-5
+    for i in range(1, 6):
+        repo.add(_make_event(i=i))
+    page1, total1 = repo.list(page=1, page_size=2)
+    page2, total2 = repo.list(page=2, page_size=2)
+    page3, total3 = repo.list(page=3, page_size=2)
+    assert total1 == total2 == total3 == 5
+    assert [e.id for e in page1] == ["id-1", "id-2"]
+    assert [e.id for e in page2] == ["id-3", "id-4"]
+    assert [e.id for e in page3] == ["id-5"]
+
+
+def test_list_page_beyond_range_empty(repo):
+    _seed(repo)
+    items, total = repo.list(page=10, page_size=20)
+    assert total == 3 and items == []
+
+
+def test_json_update_persists_across_instances(tmp_path):
+    path = tmp_path / "events.json"
+    JsonEventRepository(path).add(_make_event(i=7))
+    JsonEventRepository(path).update(
+        JsonEventRepository(path).get("id-7").with_updates(venue="Nuovo")
+    )
+    assert JsonEventRepository(path).get("id-7").venue == "Nuovo"
+
+
+def test_sqlite_update_persists_across_instances(tmp_path):
+    path = tmp_path / "events.db"
+    SqliteEventRepository(path).add(_make_event(i=8))
+    SqliteEventRepository(path).update(
+        SqliteEventRepository(path).get("id-8").with_updates(venue="Nuovo")
+    )
+    assert SqliteEventRepository(path).get("id-8").venue == "Nuovo"
+
+
+def test_json_delete_persists_across_instances(tmp_path):
+    path = tmp_path / "events.json"
+    JsonEventRepository(path).add(_make_event(i=9))
+    assert JsonEventRepository(path).delete("id-9") is True
+    assert JsonEventRepository(path).get("id-9") is None
+
+
+def test_sqlite_delete_persists_across_instances(tmp_path):
+    path = tmp_path / "events.db"
+    SqliteEventRepository(path).add(_make_event(i=10))
+    assert SqliteEventRepository(path).delete("id-10") is True
+    assert SqliteEventRepository(path).get("id-10") is None

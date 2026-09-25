@@ -81,3 +81,20 @@ def test_uses_explicit_2s_timeout():
     # Verifica che la chiamata sia stata effettuata con timeout=2s.
     assert len(responses.calls) == 1
     assert responses.calls[0].request.req_kwargs.get("timeout") == 2.0
+
+
+@responses.activate
+def test_calls_expected_user_service_url():
+    # REQ-EVT-B01: la verifica interroga GET {BASE}/api/v1/users/{organizer_id}.
+    responses.add(responses.GET, _URL, json={"role": "organizer"}, status=200)
+    _directory().get_role(_UID)
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url == _URL
+
+
+@responses.activate
+def test_unexpected_status_raises_dependency_unavailable():
+    # Esiti diversi da 200/404 (es. 4xx inatteso) sono trattati come indisponibilità.
+    responses.add(responses.GET, _URL, json={"error": {}}, status=418)
+    with pytest.raises(DependencyUnavailable):
+        _directory().get_role(_UID)

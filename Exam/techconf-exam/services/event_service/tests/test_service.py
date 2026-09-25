@@ -114,6 +114,14 @@ def test_get_missing_raises(service):
         svc.get_event("missing")
 
 
+def test_get_existing_returns_event(service, organizer_id):
+    svc, _ = service
+    created = svc.create_event(_payload(organizer_id))
+    fetched = svc.get_event(created.id)
+    assert fetched.id == created.id
+    assert fetched.title == created.title
+
+
 def test_list_filters_and_total(service, organizer_id):
     svc, _ = service
     e1 = svc.create_event(_payload(organizer_id, city="Roma"))
@@ -136,11 +144,39 @@ def test_transition_draft_to_published_ok(service, organizer_id):
     assert updated.created_at == event.created_at  # invariato
 
 
+def test_transition_draft_to_cancelled_ok(service, organizer_id):
+    # REQ-EVT-B04: draft -> cancelled consentita.
+    svc, _ = service
+    event = svc.create_event(_payload(organizer_id))
+    updated = svc.update_event(event.id, {"status": "cancelled"})
+    assert updated.status is EventStatus.CANCELLED
+
+
+def test_transition_published_to_cancelled_ok(service, organizer_id):
+    # REQ-EVT-B04: published -> cancelled consentita.
+    svc, _ = service
+    event = svc.create_event(_payload(organizer_id))
+    svc.update_event(event.id, {"status": "published"})
+    updated = svc.update_event(event.id, {"status": "cancelled"})
+    assert updated.status is EventStatus.CANCELLED
+
+
 def test_transition_published_to_draft_invalid(service, organizer_id):
     # REQ-EVT-B04.
     svc, _ = service
     event = svc.create_event(_payload(organizer_id))
     svc.update_event(event.id, {"status": "published"})
+    with pytest.raises(InvalidStatusTransition):
+        svc.update_event(event.id, {"status": "draft"})
+
+
+def test_transition_from_cancelled_is_terminal(service, organizer_id):
+    # REQ-EVT-B04: cancelled è stato terminale, ogni transizione è vietata.
+    svc, _ = service
+    event = svc.create_event(_payload(organizer_id))
+    svc.update_event(event.id, {"status": "cancelled"})
+    with pytest.raises(InvalidStatusTransition):
+        svc.update_event(event.id, {"status": "published"})
     with pytest.raises(InvalidStatusTransition):
         svc.update_event(event.id, {"status": "draft"})
 
@@ -171,6 +207,39 @@ def test_update_changed_organizer_reverified(service, organizer_id):
     assert users.calls == [new_org]  # REQ-EVT-B01/B02 rieseguiti
 
 
+def test_update_changed_organizer_unknown_reference_not_found(service, organizer_id):
+    # REQ-EVT-B01 sul path di update.
+    svc, _ = service
+    event = svc.create_event(_payload(organizer_id))
+    with pytest.raises(ReferenceNotFound):
+        svc.update_event(
+            event.id, {"organizer_id": "00000000-0000-4000-8000-000000000000"}
+        )
+
+
+def test_update_changed_organizer_wrong_role_invalid_organizer(service, organizer_id):
+    # REQ-EVT-B02 sul path di update.
+    svc, users = service
+    event = svc.create_event(_payload(organizer_id))
+    attendee = "44444444-4444-4444-8444-444444444444"
+    users.roles[attendee] = "attendee"
+    with pytest.raises(InvalidOrganizer):
+        svc.update_event(event.id, {"organizer_id": attendee})
+
+
+def test_update_changed_organizer_dependency_unavailable(organizer_id):
+    # REQ-EVT-B05 sul path di update: creo con directory disponibile, poi la
+    # rendo irraggiungibile e cambio l'organizzatore.
+    users = FakeUserDirectory({organizer_id: "organizer"})
+    svc = EventService(MemoryEventRepository(), users)
+    event = svc.create_event(_payload(organizer_id))
+    users.unavailable = True
+    with pytest.raises(DependencyUnavailable):
+        svc.update_event(
+            event.id, {"organizer_id": "55555555-5555-4555-8555-555555555555"}
+        )
+
+
 def test_update_patch_date_coherence_uses_persisted(service, organizer_id):
     # REQ-EVT-B03 in PATCH: end nuovo confrontato con start persistito.
     svc, _ = service
@@ -183,6 +252,21 @@ def test_replace_missing_raises(service, organizer_id):
     svc, _ = service
     with pytest.raises(EventNotFound):
         svc.replace_event("missing", _payload(organizer_id))
+
+
+def test_replace_updates_fields_and_touches_updated_at(service, organizer_id):
+    # Requirement 3.1/3.3: replace aggiorna i campi, updated_at avanza,
+    # id/created_at restano invariati.
+    svc, _ = service
+    event = svc.create_event(_payload(organizer_id))
+    replaced = svc.replace_event(
+        event.id, _payload(organizer_id, title="PyConf Edizione 2027", city="Milano")
+    )
+    assert replaced.id == event.id
+    assert replaced.created_at == event.created_at
+    assert replaced.title == "PyConf Edizione 2027"
+    assert replaced.city == "Milano"
+    assert replaced.updated_at >= event.updated_at
 
 
 def test_delete(service, organizer_id):
