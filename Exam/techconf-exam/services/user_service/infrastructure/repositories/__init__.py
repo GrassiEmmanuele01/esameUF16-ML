@@ -11,6 +11,7 @@ l'univocità case-insensitive (REQ-USR-B01).
 
 from __future__ import annotations
 
+from .factory import build_repository
 from .json_repository import JsonUserRepository
 from .memory_repository import MemoryUserRepository
 from .sqlite_repository import SqliteUserRepository
@@ -19,4 +20,5 @@ __all__ = [
     "MemoryUserRepository",
     "JsonUserRepository",
     "SqliteUserRepository",
+    "build_repository",
 ]

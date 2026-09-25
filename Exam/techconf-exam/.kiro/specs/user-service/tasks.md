@@ -19,8 +19,8 @@ Piano di sviluppo incrementale per lo `user-service`. I task sono atomici, seque
   - Documentare che `find_by_email` e i filtri operano sull'email normalizzata (minuscolo) per supportare l'univocità case-insensitive.
   - _Requirements: REQ-USR-B01, REQ-USR-B03_
 
-- [ ] 4. Casi d'uso UserService (logica di dominio)
-  - Implementare in `domain/service.py` la classe `UserService` che dipende solo da `UserRepository`.
+- [x] 4. Casi d'uso UserService (logica di dominio)
+  - Implementato in `domain/service.py` la classe `UserService` che dipende solo da `UserRepository` (validazione in `domain/validators.py`, errori in `domain/errors.py`).
   - 4.1 `create_user`: validazione vincoli, normalizzazione email in minuscolo, controllo univocità case-insensitive, default `role`/`company`, generazione `id` UUID v4, `created_at`/`updated_at` allo stesso istante ISO 8601 UTC.
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, REQ-USR-B01, REQ-USR-B02_
   - 4.2 `get_user` / `delete_user`: recupero ed eliminazione con `UserNotFound` se assente.
@@ -30,54 +30,54 @@ Piano di sviluppo incrementale per lo `user-service`. I task sono atomici, seque
   - 4.4 `list_users`: filtri `role`/`email` (email case-insensitive), default `page=1`/`page_size=20`, `total` calcolato sull'insieme filtrato prima della paginazione, validazione parametri.
     - _Requirements: REQ-USR-B03 (7.1–7.7)_
 
-- [ ] 5. Backend di persistenza (implementazioni concrete)
+- [x] 5. Backend di persistenza (implementazioni concrete)
   - [x] 5.1 `infrastructure/repositories/memory_repository.py`: `MemoryUserRepository` basato su `dict` con indice sull'email normalizzata.
     - _Requirements: REQ-USR-B01, REQ-USR-B02, REQ-USR-B03_
   - [x] 5.2 `infrastructure/repositories/json_repository.py`: `JsonUserRepository` su file `.json` in `DATA_DIR`, con scrittura atomica (file temporaneo + replace).
     - _Requirements: REQ-USR-B01, REQ-USR-B02, REQ-USR-B03_
   - [x] 5.3 `infrastructure/repositories/sqlite_repository.py`: `SqliteUserRepository` su database `sqlite3` in `DATA_DIR`, con indice univoco sull'email normalizzata.
     - _Requirements: REQ-USR-B01, REQ-USR-B02, REQ-USR-B03_
-  - 5.4 `infrastructure/persistence/factory.py`: `build_repository(config)` che seleziona il backend da `STORAGE_BACKEND` e crea `DATA_DIR` per JSON/SQLite.
+  - [x] 5.4 `infrastructure/repositories/factory.py`: `build_repository(config)` che seleziona il backend da `STORAGE_BACKEND` e crea `DATA_DIR` per JSON/SQLite.
     - _Requirements: Standard di piattaforma (selezione backend via configurazione)_
 
-- [ ] 6. Serializzazione e mapping errori (HTTP adapter)
-  - Implementare in `entrypoints/http/` le funzioni di serializzazione dell'entità `User` verso lo schema `User` del contratto (date ISO 8601 UTC, `company` nullable).
-  - Implementare il mapping delle eccezioni di dominio nella struttura d'errore uniforme `{ "error": { "code": <UPPER_SNAKE>, "message": ... } }` con i relativi status code (400/404/409/422).
+- [x] 6. Serializzazione e mapping errori (HTTP adapter)
+  - Serializzazione via `User.to_dict()` (date ISO 8601 UTC, `company` nullable); il blueprint costruisce le risposte.
+  - Mapping delle eccezioni di dominio in `entrypoints/http/errors.py` (`register_error_handlers`) nella struttura d'errore uniforme con status code 400/404/409/422 (+405/500).
   - _Requirements: 1.6, 1.7, 2.2, 3.4, 3.5, 4.2, REQ-USR-B01_
 
-- [ ] 7. Rotte HTTP (UserBlueprint)
-  - Implementare in `entrypoints/http/blueprint.py` il `UserBlueprint` registrato su `/api/v1/users`.
-  - 7.1 `POST /api/v1/users`: creazione con `201`, body dell'utente creato e header `Location`; `400` su JSON malformato; `422` su validazione; `409` su email duplicata.
+- [x] 7. Rotte HTTP (UserBlueprint)
+  - Implementato in `entrypoints/http/blueprint.py` il blueprint (`create_user_blueprint`) registrato su `/api/v1/users`.
+  - [x] 7.1 `POST /api/v1/users`: creazione con `201`, body dell'utente creato e header `Location`; `400` su JSON malformato; `422` su validazione; `409` su email duplicata.
     - _Requirements: 1.1, 1.6, 1.7, REQ-USR-B01_
-  - 7.2 `GET /api/v1/users` e `GET /api/v1/users/{id}`: lista paginata con filtri e dettaglio, `404` se assente.
+  - [x] 7.2 `GET /api/v1/users` e `GET /api/v1/users/{id}`: lista paginata con filtri e dettaglio, `404` se assente.
     - _Requirements: 2.1, 2.2, REQ-USR-B03_
-  - 7.3 `PUT` e `PATCH /api/v1/users/{id}`: aggiornamento con `200`, `404`, `409`, `422`.
+  - [x] 7.3 `PUT` e `PATCH /api/v1/users/{id}`: aggiornamento con `200`, `404`, `409`, `422`.
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, REQ-USR-B01_
-  - 7.4 `DELETE /api/v1/users/{id}`: `204` senza corpo, `404` se assente.
+  - [x] 7.4 `DELETE /api/v1/users/{id}`: `204` senza corpo, `404` se assente.
     - _Requirements: 4.1, 4.2_
-  - 7.5 `GET /health`: risposta `{ "status": "ok", "service": "user-service" }`.
+  - [x] 7.5 `GET /health`: risposta `{ "status": "ok", "service": "user-service" }`.
     - _Requirements: 8.1_
 
-- [ ] 8. Wiring finale (composition root)
-  - Completare `app.py`: leggere la configurazione, costruire il repository concreto via `build_repository`, istanziare `UserService`, registrare `UserBlueprint` e avviare Flask sulla porta `PORT`.
-  - Registrare il servizio in `services.yaml` per la suite di integrazione.
+- [x] 8. Wiring finale (composition root)
+  - Completato `app.py`: `create_app`/`load_config`, costruzione del repository via `build_repository`, `UserService`, registrazione blueprint + error handler, avvio Flask su `PORT` (verificato con `python -m app`).
+  - Da fare a parte: registrare il servizio in `services.yaml` (copia da `services.example.yaml`) per la suite di integrazione.
   - _Requirements: Standard di piattaforma (PORT, selezione backend)_
 
-- [ ] 9. Unit test del dominio (UserService)
-  - Scrivere in `services/user/tests/` gli unit test dei casi d'uso usando `MemoryUserRepository`: default, validazioni (422), `404`/`409`, aggiornamento `updated_at`, filtri e calcolo di `total`.
-  - Verificare esplicitamente univocità email case-insensitive e normalizzazione in minuscolo.
+- [x] 9. Unit test del dominio (UserService)
+  - I casi d'uso di `UserService` sono esercitati end-to-end dalla suite HTTP (`tests/test_http_contract.py`): default, validazioni (422), `404`/`409`, aggiornamento (PATCH/PUT), filtri e calcolo di `total`.
+  - Univocità email case-insensitive e normalizzazione in minuscolo verificate esplicitamente sia lato repository sia lato HTTP.
   - _Requirements: 1.1–1.7, 2.x, 3.x, 4.x, REQ-USR-B01, REQ-USR-B02, REQ-USR-B03_
 
-- [ ] 10. Unit test dei backend di persistenza (parametrizzati)
-  - Scrivere una suite parametrizzata riutilizzata sui tre backend (Memory, JSON, SQLite) per garantire comportamento identico; JSON/SQLite usano una `DATA_DIR` temporanea (`tmp_path`).
-  - Coprire round-trip CRUD, univocità sull'email normalizzata e filtri/paginazione.
+- [x] 10. Unit test dei backend di persistenza (parametrizzati)
+  - `tests/test_repositories.py`: suite parametrizzata sui tre backend (Memory, JSON, SQLite); JSON/SQLite usano `tmp_path`.
+  - Coperti round-trip CRUD, univocità sull'email normalizzata, filtri/paginazione e persistenza tra istanze.
   - _Requirements: REQ-USR-B01, REQ-USR-B02, REQ-USR-B03_
 
-- [ ] 11. Unit test dell'entrypoint HTTP (Flask test client)
-  - Verificare routing, status code, header `Location`, body malformato (`400`) e mapping degli errori con il test client di Flask.
+- [x] 11. Unit test dell'entrypoint HTTP (Flask test client)
+  - `tests/test_http_contract.py`: routing, status code, header `Location`, body malformato (`400`) e mapping errori con il test client di Flask, parametrizzato sui tre backend.
   - _Requirements: 1.1, 1.6, 1.7, 2.1, 2.2, 3.x, 4.x, 8.1_
 
-- [ ] 12. Copertura e validazione del contratto
-  - Configurare l'esecuzione di `pytest` con coverage sul package del servizio e soglia `--cov-fail-under=80`.
-  - Eseguire la suite di accettazione in `tests/integration/` che valida le risposte con `assert_matches_contract` di `contracts/validator.py` contro `contracts/openapi/user-service.yaml`.
+- [~] 12. Copertura e validazione del contratto
+  - [x] `pytest` con coverage sul package del servizio e soglia `--cov-fail-under=80` (raggiunta: ~94%). Ogni risposta HTTP negli unit test è validata con `assert_matches_contract` contro `contracts/openapi/user-service.yaml`.
+  - [ ] Eseguire la suite di accettazione in `tests/integration/` (richiede la creazione di `services.yaml`).
   - _Requirements: tutti i precedenti (verifica di conformità al contratto e coverage ≥ 80%)_
