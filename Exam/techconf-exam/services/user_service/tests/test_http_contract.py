@@ -121,7 +121,7 @@ def test_get_missing_returns_404(client):
     resp = client.get(path)
     body = _check("GET", path, resp)
     assert resp.status_code == 404
-    assert body["error"]["code"] == "USER_NOT_FOUND"
+    assert body["error"]["code"] == "NOT_FOUND"
 
 
 # --------------------------------- update ---------------------------------- #
@@ -160,7 +160,7 @@ def test_update_missing_returns_404(client):
     resp = client.patch(path, json={"company": "X"})
     body = _check("PATCH", path, resp)
     assert resp.status_code == 404
-    assert body["error"]["code"] == "USER_NOT_FOUND"
+    assert body["error"]["code"] == "NOT_FOUND"
 
 
 def test_update_email_conflict_returns_409(client):
@@ -185,7 +185,7 @@ def test_delete_204_then_404(client):
     resp2 = client.delete(path)
     body = _check("DELETE", path, resp2)
     assert resp2.status_code == 404
-    assert body["error"]["code"] == "USER_NOT_FOUND"
+    assert body["error"]["code"] == "NOT_FOUND"
 
 
 # ------------------------------ list / filters ----------------------------- #

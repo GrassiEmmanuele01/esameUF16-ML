@@ -1,0 +1,63 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "2. Entità di dominio ed eccezioni": [
+      {
+        "executionId": "da9f73d5-861f-4f2f-bb94-851101a04abc",
+        "chatSessionId": "sess_847e7267-9c8c-46f6-b743-0a0c63f662ba",
+        "timestamp": 1790340869629
+      },
+      {
+        "executionId": "da9f73d5-861f-4f2f-bb94-851101a04abc",
+        "chatSessionId": "sess_847e7267-9c8c-46f6-b743-0a0c63f662ba",
+        "timestamp": 1790340877009
+      },
+      {
+        "executionId": "da9f73d5-861f-4f2f-bb94-851101a04abc",
+        "chatSessionId": "sess_847e7267-9c8c-46f6-b743-0a0c63f662ba",
+        "timestamp": 1790340950862
+      }
+    ],
+    "3. Interfaccia UserRepository (astrazione di persistenza)": [
+      {
+        "executionId": "da9f73d5-861f-4f2f-bb94-851101a04abc",
+        "chatSessionId": "sess_847e7267-9c8c-46f6-b743-0a0c63f662ba",
+        "timestamp": 1790340869745
+      },
+      {
+        "executionId": "da9f73d5-861f-4f2f-bb94-851101a04abc",
+        "chatSessionId": "sess_847e7267-9c8c-46f6-b743-0a0c63f662ba",
+        "timestamp": 1790340954337
+      },
+      {
+        "executionId": "da9f73d5-861f-4f2f-bb94-851101a04abc",
+        "chatSessionId": "sess_847e7267-9c8c-46f6-b743-0a0c63f662ba",
+        "timestamp": 1790340995938
+      }
+    ],
+    "Eseguire la suite di accettazione in `tests/integration/` (richiede la creazione di `services.yaml`).": [
+      {
+        "executionId": "da9f73d5-861f-4f2f-bb94-851101a04abc",
+        "chatSessionId": "sess_847e7267-9c8c-46f6-b743-0a0c63f662ba",
+        "timestamp": 1790340869810
+      },
+      {
+        "executionId": "da9f73d5-861f-4f2f-bb94-851101a04abc",
+        "chatSessionId": "sess_847e7267-9c8c-46f6-b743-0a0c63f662ba",
+        "timestamp": 1790341002969
+      },
+      {
+        "executionId": "da9f73d5-861f-4f2f-bb94-851101a04abc",
+        "chatSessionId": "sess_847e7267-9c8c-46f6-b743-0a0c63f662ba",
+        "timestamp": 1790341415890
+      }
+    ],
+    "12. Copertura e validazione del contratto": [
+      {
+        "executionId": "da9f73d5-861f-4f2f-bb94-851101a04abc",
+        "chatSessionId": "sess_847e7267-9c8c-46f6-b743-0a0c63f662ba",
+        "timestamp": 1790341422632
+      }
+    ]
+  }
+}

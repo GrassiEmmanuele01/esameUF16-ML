@@ -1,0 +1,47 @@
+# -----------------------------------------------------------------------------
+# services.yaml — manifest read by the acceptance suite
+# -----------------------------------------------------------------------------
+# Declares ONLY the services implemented in this repository. Services that are
+# not listed here are SKIPPED (their acceptance tests are not run and not
+# failed).
+#
+# Implemented services (directories under services/ use underscores):
+#   * services/user_service
+#   * services/event_service
+#
+# Not yet implemented (kept commented out so their tests are skipped):
+#   * registration
+#   * feedback
+#   * notification
+#
+# For each declared service the suite injects PORT and the *_SERVICE_URL env
+# vars (acceptance ports 15001-15005) and waits for GET {base_url}/health.
+# -----------------------------------------------------------------------------
+
+services:
+  # ------------------------------- mandatory -------------------------------
+  user:
+    cwd: services/user_service
+    command: python -m app
+    health_path: /health
+
+  event:
+    cwd: services/event_service
+    command: python -m app
+    health_path: /health
+
+  # registration:
+  #   cwd: services/registration_service
+  #   command: python -m app
+  #   health_path: /health
+
+  # ------------------------------- optional --------------------------------
+  # feedback:
+  #   cwd: services/feedback_service
+  #   command: python -m app
+  #   health_path: /health
+
+  # notification:
+  #   cwd: services/notification_service
+  #   command: python -m app
+  #   health_path: /health

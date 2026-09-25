@@ -10,9 +10,9 @@ from common import ConflictError, NotFoundError
 
 
 class UserNotFound(NotFoundError):
-    """L'utente richiesto non esiste (404 USER_NOT_FOUND)."""
+    """L'utente richiesto non esiste (404 NOT_FOUND)."""
 
-    code = "USER_NOT_FOUND"
+    code = "NOT_FOUND"
 
     def __init__(self, user_id: str | None = None) -> None:
         message = "Utente non trovato"

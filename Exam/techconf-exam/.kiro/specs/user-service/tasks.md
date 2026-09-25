@@ -8,13 +8,13 @@ Piano di sviluppo incrementale per lo `user-service`. I task sono atomici, seque
   - Creare `app.py` come composition root minimale (Flask app factory) che verrà completato al task 8.
   - _Requirements: Standard di piattaforma (PORT, base path); Requirement 8 (health, completato al task 7)_
 
-- [ ] 2. Entità di dominio ed eccezioni
+- [x] 2. Entità di dominio ed eccezioni
   - Implementare in `domain/models.py` l'entità `User` con i campi `id`, `first_name`, `last_name`, `email`, `company`, `role`, `created_at`, `updated_at` e i valori di default (`role=attendee`, `company=null`).
   - Implementare in `domain/errors.py` le eccezioni di dominio: `MalformedJson`, `UserNotFound`, `EmailAlreadyExists`, `ValidationError`.
   - Aggiungere utility per generazione UUID v4 lato server e timestamp ISO 8601 UTC (riuso da `packages/common/` se disponibile).
   - _Requirements: 1.2, 1.3, 1.4, 1.5_
 
-- [ ] 3. Interfaccia UserRepository (astrazione di persistenza)
+- [x] 3. Interfaccia UserRepository (astrazione di persistenza)
   - Definire in `domain/repository.py` l'interfaccia astratta `UserRepository` (`abc.ABC`) con i metodi `add`, `get`, `find_by_email`, `update`, `delete` e `list(role, email, page, page_size) -> (items, total)`.
   - Documentare che `find_by_email` e i filtri operano sull'email normalizzata (minuscolo) per supportare l'univocità case-insensitive.
   - _Requirements: REQ-USR-B01, REQ-USR-B03_
@@ -77,7 +77,7 @@ Piano di sviluppo incrementale per lo `user-service`. I task sono atomici, seque
   - `tests/test_http_contract.py`: routing, status code, header `Location`, body malformato (`400`) e mapping errori con il test client di Flask, parametrizzato sui tre backend.
   - _Requirements: 1.1, 1.6, 1.7, 2.1, 2.2, 3.x, 4.x, 8.1_
 
-- [~] 12. Copertura e validazione del contratto
+- [x] 12. Copertura e validazione del contratto
   - [x] `pytest` con coverage sul package del servizio e soglia `--cov-fail-under=80` (raggiunta: ~94%). Ogni risposta HTTP negli unit test è validata con `assert_matches_contract` contro `contracts/openapi/user-service.yaml`.
-  - [ ] Eseguire la suite di accettazione in `tests/integration/` (richiede la creazione di `services.yaml`).
+  - [x] Eseguire la suite di accettazione in `tests/integration/` (richiede la creazione di `services.yaml`).
   - _Requirements: tutti i precedenti (verifica di conformità al contratto e coverage ≥ 80%)_

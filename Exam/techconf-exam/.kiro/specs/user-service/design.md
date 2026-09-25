@@ -70,7 +70,7 @@ Flask `Blueprint` registrato sul base path `/api/v1/users`, più la route `/heal
   | Eccezione di dominio | Status | `code` |
   |----------------------|--------|--------|
   | `MalformedJson` | 400 | `MALFORMED_JSON` |
-  | `UserNotFound` | 404 | `USER_NOT_FOUND` |
+  | `UserNotFound` | 404 | `NOT_FOUND` |
   | `EmailAlreadyExists` | 409 | `EMAIL_ALREADY_EXISTS` |
   | `ValidationError` | 422 | `VALIDATION_ERROR` |
 

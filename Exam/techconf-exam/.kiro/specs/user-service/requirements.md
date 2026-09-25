@@ -56,7 +56,7 @@ I requisiti seguono la notazione EARS (Easy Approach to Requirements Syntax). Gl
 ### Acceptance Criteria
 
 1. QUANDO viene ricevuta una `GET /api/v1/users/{id}` con un id esistente, IL SISTEMA DEVE rispondere con stato `200` e il corpo dell'utente.
-2. SE l'id non corrisponde ad alcun utente, ALLORA IL SISTEMA DEVE rispondere con stato `404` ed errore `USER_NOT_FOUND`.
+2. SE l'id non corrisponde ad alcun utente, ALLORA IL SISTEMA DEVE rispondere con stato `404` ed errore `NOT_FOUND`.
 
 ---
 
@@ -69,7 +69,7 @@ I requisiti seguono la notazione EARS (Easy Approach to Requirements Syntax). Gl
 1. QUANDO viene ricevuta una `PUT /api/v1/users/{id}` valida su un utente esistente, IL SISTEMA DEVE sostituire i campi modificabili dell'utente e rispondere con stato `200` e il corpo aggiornato.
 2. QUANDO viene ricevuta una `PATCH /api/v1/users/{id}` valida su un utente esistente, IL SISTEMA DEVE aggiornare solo i campi presenti nel body e lasciare invariati gli altri, rispondendo con stato `200` e il corpo aggiornato.
 3. QUANDO un utente viene aggiornato con successo, IL SISTEMA DEVE aggiornare `updated_at` all'istante corrente in ISO 8601 UTC e lasciare invariati `id` e `created_at`.
-4. SE l'id non corrisponde ad alcun utente, ALLORA IL SISTEMA DEVE rispondere con stato `404` ed errore `USER_NOT_FOUND`.
+4. SE l'id non corrisponde ad alcun utente, ALLORA IL SISTEMA DEVE rispondere con stato `404` ed errore `NOT_FOUND`.
 5. SE il body viola i vincoli di validazione, ALLORA IL SISTEMA DEVE rispondere con stato `422` ed errore `VALIDATION_ERROR` senza modificare l'utente.
 
 ---
@@ -81,7 +81,7 @@ I requisiti seguono la notazione EARS (Easy Approach to Requirements Syntax). Gl
 ### Acceptance Criteria
 
 1. QUANDO viene ricevuta una `DELETE /api/v1/users/{id}` su un utente esistente, IL SISTEMA DEVE eliminare l'utente e rispondere con stato `204` senza corpo.
-2. SE l'id non corrisponde ad alcun utente, ALLORA IL SISTEMA DEVE rispondere con stato `404` ed errore `USER_NOT_FOUND`.
+2. SE l'id non corrisponde ad alcun utente, ALLORA IL SISTEMA DEVE rispondere con stato `404` ed errore `NOT_FOUND`.
 
 ---
 

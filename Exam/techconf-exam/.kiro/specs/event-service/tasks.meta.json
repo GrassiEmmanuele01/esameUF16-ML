@@ -1,0 +1,103 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Setup del servizio e configurazione": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442226
+      }
+    ],
+    "2. Entità di dominio, stati ed eccezioni": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442305
+      }
+    ],
+    "3. Porte di dominio (interfacce)": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442355
+      }
+    ],
+    "4. Validazione dei payload (regole di schema e date)": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442402
+      }
+    ],
+    "5. Casi d'uso EventService (logica di dominio)": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442461
+      }
+    ],
+    "6. Backend di persistenza": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442543
+      }
+    ],
+    "7. Client HTTP verso user-service": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442593
+      }
+    ],
+    "8. HTTP: serializzazione, mapping errori e rotte": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442636
+      }
+    ],
+    "9. Wiring finale (composition root)": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442687
+      }
+    ],
+    "10. Unit test del dominio (EventService)": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442769
+      }
+    ],
+    "11. Unit test dei backend di persistenza (parametrizzati)": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442822
+      }
+    ],
+    "12. Unit test del client user-service (responses)": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442863
+      }
+    ],
+    "13. Unit test HTTP + validazione contratto": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442909
+      }
+    ],
+    "14. Accettazione (opzionale, richiede services.yaml)": [
+      {
+        "executionId": "9018dd84-c2c2-40d3-bdb8-0acb7ec457ce",
+        "chatSessionId": "sess_ca3d1382-5cad-4dec-b6f4-d45961b43ca1",
+        "timestamp": 1790341442964
+      }
+    ]
+  }
+}
