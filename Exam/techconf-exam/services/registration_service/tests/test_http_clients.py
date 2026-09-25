@@ -46,6 +46,32 @@ def test_user_connection_error_raises():
 
 
 @responses.activate
+def test_user_timeout_raises():
+    # Timeout esplicito (2s) -> RequestException -> DependencyUnavailable.
+    responses.add(responses.GET, _USER_URL, body=requests.exceptions.ConnectTimeout("timeout"))
+    with pytest.raises(DependencyUnavailable):
+        HttpUserDirectory(_USER_BASE).exists(_UID)
+
+
+@responses.activate
+def test_user_unexpected_status_raises():
+    # Esiti diversi da 200/404 sono trattati come indisponibilità.
+    responses.add(responses.GET, _USER_URL, json={"error": {}}, status=418)
+    with pytest.raises(DependencyUnavailable):
+        HttpUserDirectory(_USER_BASE).exists(_UID)
+
+
+@responses.activate
+def test_user_calls_expected_url():
+    # REQ-REG-B01: verifica GET {USER_SERVICE_URL}/api/v1/users/{id}.
+    responses.add(responses.GET, _USER_URL, json={"role": "attendee"}, status=200)
+    HttpUserDirectory(_USER_BASE).exists(_UID)
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.method == "GET"
+    assert responses.calls[0].request.url == _USER_URL
+
+
+@responses.activate
 def test_user_uses_2s_timeout():
     responses.add(responses.GET, _USER_URL, json={"role": "attendee"}, status=200)
     HttpUserDirectory(_USER_BASE).exists(_UID)
@@ -63,7 +89,10 @@ def test_event_get_returns_event_info():
     )
     info = HttpEventDirectory(_EVENT_BASE).get(_EID)
     assert info is not None
-    assert info.status == "published" and info.capacity == 100 and info.price == 149.0
+    # REQ-REG-B02/B03/B06: status, capacity e price estratti (e tipizzati) dal body.
+    assert info.status == "published"
+    assert info.capacity == 100 and isinstance(info.capacity, int)
+    assert info.price == 149.0 and isinstance(info.price, float)
 
 
 @responses.activate
@@ -84,6 +113,28 @@ def test_event_timeout_raises():
     responses.add(responses.GET, _EVENT_URL, body=requests.exceptions.ConnectTimeout("timeout"))
     with pytest.raises(DependencyUnavailable):
         HttpEventDirectory(_EVENT_BASE).get(_EID)
+
+
+@responses.activate
+def test_event_connection_error_raises():
+    responses.add(responses.GET, _EVENT_URL, body=requests.exceptions.ConnectionError("refused"))
+    with pytest.raises(DependencyUnavailable):
+        HttpEventDirectory(_EVENT_BASE).get(_EID)
+
+
+@responses.activate
+def test_event_calls_expected_url():
+    # REQ-REG-B02: verifica GET {EVENT_SERVICE_URL}/api/v1/events/{id}.
+    responses.add(
+        responses.GET,
+        _EVENT_URL,
+        json={"status": "published", "capacity": 10, "price": 0},
+        status=200,
+    )
+    HttpEventDirectory(_EVENT_BASE).get(_EID)
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.method == "GET"
+    assert responses.calls[0].request.url == _EVENT_URL
 
 
 @responses.activate

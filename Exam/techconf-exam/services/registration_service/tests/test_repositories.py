@@ -96,6 +96,44 @@ def test_list_filters_and_total(repo):
     assert total == 1 and len(items) == 1
 
 
+def test_list_second_page_offset(repo):
+    # created_at crescente -> ordinamento deterministico id-1..id-5
+    for i in range(1, 6):
+        repo.add(_make(i=i))
+    page1, total1 = repo.list(page=1, page_size=2)
+    page2, total2 = repo.list(page=2, page_size=2)
+    page3, total3 = repo.list(page=3, page_size=2)
+    assert total1 == total2 == total3 == 5
+    assert [r.id for r in page1] == ["id-1", "id-2"]
+    assert [r.id for r in page2] == ["id-3", "id-4"]
+    assert [r.id for r in page3] == ["id-5"]
+
+
+def test_list_page_beyond_range_empty(repo):
+    repo.add(_make(i=1))
+    repo.add(_make(i=2))
+    items, total = repo.list(page=10, page_size=20)
+    assert total == 2 and items == []
+
+
+def test_list_default_pagination(repo):
+    repo.add(_make(i=1))
+    items, total = repo.list()
+    assert total == 1 and len(items) == 1
+
+
+def test_cancel_frees_slot(repo):
+    # confirmed -> cancelled deve liberare il posto (REQ-REG-B05) e
+    # rimuovere l'iscrizione dalla ricerca della coppia confermata (REQ-REG-B04).
+    repo.add(_make(i=1, user_id="u1", status=RegistrationStatus.CONFIRMED))
+    assert repo.count_confirmed(_EVENT) == 1
+    assert repo.find_confirmed("u1", _EVENT) is not None
+
+    repo.update(repo.get("id-1").with_updates(status=RegistrationStatus.CANCELLED))
+    assert repo.count_confirmed(_EVENT) == 0
+    assert repo.find_confirmed("u1", _EVENT) is None
+
+
 def test_persistence_json(tmp_path):
     path = tmp_path / "r.json"
     JsonRegistrationRepository(path).add(_make(i=5))
@@ -106,3 +144,41 @@ def test_persistence_sqlite(tmp_path):
     path = tmp_path / "r.db"
     SqliteRegistrationRepository(path).add(_make(i=6))
     assert SqliteRegistrationRepository(path).get("id-6") is not None
+
+
+def test_json_update_persists_across_instances(tmp_path):
+    path = tmp_path / "r.json"
+    JsonRegistrationRepository(path).add(_make(i=7, status=RegistrationStatus.CONFIRMED))
+    JsonRegistrationRepository(path).update(
+        JsonRegistrationRepository(path).get("id-7").with_updates(
+            status=RegistrationStatus.CANCELLED
+        )
+    )
+    assert JsonRegistrationRepository(path).get("id-7").status is RegistrationStatus.CANCELLED
+    assert JsonRegistrationRepository(path).count_confirmed(_EVENT) == 0
+
+
+def test_sqlite_update_persists_across_instances(tmp_path):
+    path = tmp_path / "r.db"
+    SqliteRegistrationRepository(path).add(_make(i=8, status=RegistrationStatus.CONFIRMED))
+    SqliteRegistrationRepository(path).update(
+        SqliteRegistrationRepository(path).get("id-8").with_updates(
+            status=RegistrationStatus.CANCELLED
+        )
+    )
+    assert SqliteRegistrationRepository(path).get("id-8").status is RegistrationStatus.CANCELLED
+    assert SqliteRegistrationRepository(path).count_confirmed(_EVENT) == 0
+
+
+def test_json_delete_persists_across_instances(tmp_path):
+    path = tmp_path / "r.json"
+    JsonRegistrationRepository(path).add(_make(i=9))
+    assert JsonRegistrationRepository(path).delete("id-9") is True
+    assert JsonRegistrationRepository(path).get("id-9") is None
+
+
+def test_sqlite_delete_persists_across_instances(tmp_path):
+    path = tmp_path / "r.db"
+    SqliteRegistrationRepository(path).add(_make(i=10))
+    assert SqliteRegistrationRepository(path).delete("id-10") is True
+    assert SqliteRegistrationRepository(path).get("id-10") is None

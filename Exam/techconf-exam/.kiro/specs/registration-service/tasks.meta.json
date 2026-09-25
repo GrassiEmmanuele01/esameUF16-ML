@@ -1,0 +1,226 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Setup del servizio e configurazione": [
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343121025
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343128537
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343212772
+      }
+    ],
+    "2. Entità di dominio, stati ed eccezioni": [
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343121121
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343216233
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343279774
+      }
+    ],
+    "3. Porte di dominio (interfacce)": [
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343121188
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343282908
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343365601
+      }
+    ],
+    "4. Casi d'uso RegistrationService (regole di business)": [
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343121256
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343369371
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343438112
+      }
+    ],
+    "5. Backend di persistenza": [
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343121325
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343444929
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343529174
+      }
+    ],
+    "6. Client HTTP verso le dipendenze": [
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343121390
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343534071
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343604552
+      }
+    ],
+    "7. HTTP: serializzazione, mapping errori e rotte": [
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343121453
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343608392
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343691672
+      }
+    ],
+    "8. Wiring finale (composition root)": [
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343121541
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343694873
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343758336
+      }
+    ],
+    "9. Unit test del dominio (RegistrationService)": [
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343121620
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343765288
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343866320
+      }
+    ],
+    "10. Unit test dei backend di persistenza (parametrizzati)": [
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343121678
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343869660
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343956545
+      }
+    ],
+    "11. Unit test dei client HTTP (responses)": [
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343121744
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343960105
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790344036772
+      }
+    ],
+    "12. Unit test HTTP + validazione contratto": [
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343121813
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790344040143
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790344102358
+      }
+    ],
+    "13. Accettazione (opzionale, richiede services.yaml)": [
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790343121886
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790344110179
+      },
+      {
+        "executionId": "7f7bd8ee-f00b-406e-9eb7-b6e7486c7b25",
+        "chatSessionId": "sess_1f78c386-4ef0-43ac-966c-74b156230304",
+        "timestamp": 1790344192224
+      }
+    ]
+  }
+}

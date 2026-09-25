@@ -27,9 +27,12 @@ class UserDirectory(ABC):
 
     @abstractmethod
     def exists(self, user_id: str) -> bool:
-        """True se l'utente esiste, False se lo user-service risponde 404.
+        """Verifica l'esistenza di un utente (REQ-REG-B01).
 
-        Solleva ``DependencyUnavailable`` se lo user-service è irraggiungibile o 5xx.
+        - Ritorna ``True`` se l'utente esiste (user-service risponde 200).
+        - Ritorna ``False`` se l'utente non esiste (user-service risponde 404).
+        - Solleva :class:`registration_service.domain.errors.DependencyUnavailable`
+          se lo user-service è irraggiungibile (connessione/timeout) o 5xx.
         """
         raise NotImplementedError
 
@@ -39,8 +42,12 @@ class EventDirectory(ABC):
 
     @abstractmethod
     def get(self, event_id: str) -> EventInfo | None:
-        """Restituisce :class:`EventInfo` se l'evento esiste, ``None`` su 404.
+        """Recupera le informazioni di un evento (REQ-REG-B02/B03/B05/B06).
 
-        Solleva ``DependencyUnavailable`` se l'event-service è irraggiungibile o 5xx.
+        - Ritorna :class:`EventInfo` (``status``, ``capacity``, ``price``) se
+          l'evento esiste (event-service risponde 200).
+        - Ritorna ``None`` se l'evento non esiste (event-service risponde 404).
+        - Solleva :class:`registration_service.domain.errors.DependencyUnavailable`
+          se l'event-service è irraggiungibile (connessione/timeout) o 5xx.
         """
         raise NotImplementedError

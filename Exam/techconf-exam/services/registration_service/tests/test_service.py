@@ -185,3 +185,153 @@ def test_list_filters():
     assert total == 1
     items, total = svc.list_registrations(status="confirmed")
     assert total == 1
+
+
+# ------------------------ create: format & extra cases -------------------- #
+def test_create_generates_uuid_v4_id_and_iso_utc_timestamps():
+    """Requirement 1.2: id UUID v4 lato server, timestamp ISO 8601 UTC coincidenti."""
+    import uuid
+
+    svc, _ = _service()
+    reg = svc.create_registration(_payload())
+    # id è un UUID versione 4 generato lato server.
+    parsed = uuid.UUID(reg.id)
+    assert parsed.version == 4
+    # created_at/updated_at coincidono e sono ISO 8601 UTC (suffisso Z).
+    assert reg.created_at == reg.updated_at
+    assert reg.created_at.endswith("Z")
+
+
+def test_create_event_cancelled_event_not_open():
+    """REQ-REG-B03: un evento 'cancelled' non consente iscrizioni."""
+    svc, _ = _service(status="cancelled")
+    with pytest.raises(EventNotOpen):
+        svc.create_registration(_payload())
+
+
+def test_create_extra_field_rejected():
+    """Requirement 1.4: campi non ammessi -> VALIDATION_ERROR."""
+    svc, _ = _service()
+    with pytest.raises(ValidationError):
+        svc.create_registration({"user_id": _USER, "event_id": _EVENT, "amount": 10})
+
+
+def test_create_dependency_unavailable_does_not_persist():
+    """Requirement 14.2: in caso di dipendenza offline non viene creata l'iscrizione."""
+    svc, repo = _service(events_unavailable=True)
+    with pytest.raises(DependencyUnavailable):
+        svc.create_registration(_payload())
+    assert repo.count_confirmed(_EVENT) == 0
+
+
+# ------------------------ B04.2: cancel then re-register ------------------- #
+def test_new_registration_allowed_after_cancel_same_pair():
+    """REQ-REG-B04.2: se l'unica iscrizione della coppia è cancelled, una nuova è consentita."""
+    svc, _ = _service(capacity=10)  # nessuna pressione di capienza
+    reg = svc.create_registration(_payload(user_id=_USER))
+    svc.update_status(reg.id, {"status": "cancelled"})
+    again = svc.create_registration(_payload(user_id=_USER))
+    assert again.status is RegistrationStatus.CONFIRMED
+    assert again.id != reg.id
+
+
+# --------------------------------- get/delete ------------------------------ #
+def test_get_returns_created_registration():
+    """Requirement 2.1: get per id esistente restituisce l'iscrizione."""
+    svc, _ = _service()
+    reg = svc.create_registration(_payload())
+    fetched = svc.get_registration(reg.id)
+    assert fetched.id == reg.id
+    assert fetched.user_id == _USER
+    assert fetched.event_id == _EVENT
+
+
+def test_delete_existing_returns_none():
+    """Requirement 4.1: delete di un'iscrizione esistente non solleva e la rimuove."""
+    svc, _ = _service()
+    reg = svc.create_registration(_payload())
+    assert svc.delete_registration(reg.id) is None
+    with pytest.raises(NotFound):
+        svc.get_registration(reg.id)
+
+
+# ------------------------------- list / paging ----------------------------- #
+def test_list_defaults_page_and_size():
+    """Requirement 3.1/3.2: risposta paginata con default page=1, page_size=20."""
+    svc, _ = _service()
+    svc.create_registration(_payload(user_id=_USER))
+    svc.create_registration(_payload(user_id=_USER2))
+    items, total = svc.list_registrations()
+    assert total == 2
+    assert len(items) == 2
+
+
+def test_list_pagination_total_before_slicing():
+    """Requirement 3.4: total calcolato sull'insieme filtrato, prima della paginazione."""
+    svc, _ = _service()
+    svc.create_registration(_payload(user_id=_USER))
+    svc.create_registration(_payload(user_id=_USER2))
+    page1, total = svc.list_registrations(page=1, page_size=1)
+    assert total == 2
+    assert len(page1) == 1
+    page2, total2 = svc.list_registrations(page=2, page_size=1)
+    assert total2 == 2
+    assert len(page2) == 1
+    assert page1[0].id != page2[0].id
+
+
+def test_list_combined_filters():
+    """Requirement 3.3: i filtri user_id/event_id/status vengono combinati."""
+    svc, _ = _service()
+    reg = svc.create_registration(_payload(user_id=_USER))
+    svc.create_registration(_payload(user_id=_USER2))
+    items, total = svc.list_registrations(
+        user_id=_USER, event_id=_EVENT, status="confirmed"
+    )
+    assert total == 1
+    assert items[0].id == reg.id
+
+
+def test_list_filter_by_status_cancelled():
+    """Requirement 3.3: filtro per status cancelled."""
+    svc, _ = _service()
+    reg = svc.create_registration(_payload(user_id=_USER))
+    svc.create_registration(_payload(user_id=_USER2))
+    svc.update_status(reg.id, {"status": "cancelled"})
+    items, total = svc.list_registrations(status="cancelled")
+    assert total == 1
+    assert items[0].id == reg.id
+
+
+def test_list_invalid_status_validation_error():
+    """Requirement 3.5: status fuori enum -> VALIDATION_ERROR."""
+    svc, _ = _service()
+    with pytest.raises(ValidationError):
+        svc.list_registrations(status="bogus")
+
+
+# --------------------------------- stats ----------------------------------- #
+def test_stats_reflects_freed_seat_after_cancel():
+    """REQ-REG-B05.3 + B08: la cancellazione libera un posto riflesso in /stats."""
+    svc, _ = _service(capacity=5)
+    r1 = svc.create_registration(_payload(user_id=_USER))
+    svc.create_registration(_payload(user_id=_USER2))
+    assert svc.stats(_EVENT)["available"] == 3
+    svc.update_status(r1.id, {"status": "cancelled"})
+    stats = svc.stats(_EVENT)
+    assert stats["confirmed"] == 1
+    assert stats["available"] == 4
+
+
+def test_stats_missing_event_id_validation_error():
+    """Requirement 13.4: event_id assente/vuoto -> VALIDATION_ERROR."""
+    svc, _ = _service()
+    with pytest.raises(ValidationError):
+        svc.stats("")
+
+
+def test_stats_malformed_event_id_validation_error():
+    """Requirement 13.4: event_id non UUID -> VALIDATION_ERROR."""
+    svc, _ = _service()
+    with pytest.raises(ValidationError):
+        svc.stats("not-a-uuid")
