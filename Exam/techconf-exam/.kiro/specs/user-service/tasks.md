@@ -31,11 +31,11 @@ Piano di sviluppo incrementale per lo `user-service`. I task sono atomici, seque
     - _Requirements: REQ-USR-B03 (7.1–7.7)_
 
 - [ ] 5. Backend di persistenza (implementazioni concrete)
-  - 5.1 `infrastructure/persistence/memory.py`: `MemoryUserRepository` basato su `dict` con indice sull'email normalizzata.
+  - [x] 5.1 `infrastructure/repositories/memory_repository.py`: `MemoryUserRepository` basato su `dict` con indice sull'email normalizzata.
     - _Requirements: REQ-USR-B01, REQ-USR-B02, REQ-USR-B03_
-  - 5.2 `infrastructure/persistence/json_store.py`: `JsonUserRepository` su file `.json` in `DATA_DIR`, con scrittura atomica (file temporaneo + replace).
+  - [x] 5.2 `infrastructure/repositories/json_repository.py`: `JsonUserRepository` su file `.json` in `DATA_DIR`, con scrittura atomica (file temporaneo + replace).
     - _Requirements: REQ-USR-B01, REQ-USR-B02, REQ-USR-B03_
-  - 5.3 `infrastructure/persistence/sqlite_store.py`: `SqliteUserRepository` su database `sqlite3` in `DATA_DIR`, con indice univoco sull'email normalizzata.
+  - [x] 5.3 `infrastructure/repositories/sqlite_repository.py`: `SqliteUserRepository` su database `sqlite3` in `DATA_DIR`, con indice univoco sull'email normalizzata.
     - _Requirements: REQ-USR-B01, REQ-USR-B02, REQ-USR-B03_
   - 5.4 `infrastructure/persistence/factory.py`: `build_repository(config)` che seleziona il backend da `STORAGE_BACKEND` e crea `DATA_DIR` per JSON/SQLite.
     - _Requirements: Standard di piattaforma (selezione backend via configurazione)_
