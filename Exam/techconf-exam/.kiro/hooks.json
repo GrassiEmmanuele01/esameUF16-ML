@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "onFileSave",
+      "trigger": "PostFileSave",
+      "matcher": "services/.*/.*\\.py$",
+      "action": {
+        "type": "command",
+        "command": "pytest services/"
+      }
+    }
+  ]
+}
